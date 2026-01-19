@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>352企划产品部门周报 - 炫彩看板版</title>
+    <style>
+        :root {
+            --primary-color: #005f73;
+            --accent-color: #0a9396;
+            --danger-bg: #fff5f5;
+            --danger-border: #feb2b2;
+            --danger-text: #c53030;
+            --bg-color: #f4f6f8;
+            --text-main: #2d3748;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* 顶部异常汇总面板 */
+        .alert-box {
+            background-color: var(--danger-bg);
+            border: 1px solid var(--danger-border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .alert-icon { font-size: 24px; margin-right: 15px; margin-top: -2px; }
+        .alert-content h3 { margin: 0 0 10px 0; color: var(--danger-text); font-size: 16px; }
+        .alert-list { margin: 0; padding-left: 20px; color: #742a2a; font-size: 14px; }
+        .alert-list li { margin-bottom: 4px; }
+
+        /* 标题样式 */
+        h1 { margin: 0; color: var(--primary-color); font-size: 26px; }
+        .header-section {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 30px;
+        }
+        h2.section-title {
+            font-size: 18px; color: var(--primary-color);
+            background: linear-gradient(to right, #e6fffa, #fff);
+            padding: 10px 15px; border-left: 5px solid var(--accent-color);
+            margin-top: 40px; margin-bottom: 15px;
+        }
+
+        /* 表格样式 */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th, td { border: 1px solid var(--border-color); padding: 10px; text-align: left; vertical-align: top; }
+        th { background-color: #f7fafc; color: #4a5568; font-weight: 600; white-space: nowrap; }
+        
+        /* 异常行高亮 */
+        tr.danger-row { background-color: #fff5f5 !important; }
+        tr.danger-row td { border-color: #fed7d7; }
+        
+        /* 进度条样式 */
+        .progress-wrapper { display: flex; align-items: center; width: 140px; }
+        .progress-text { width: 35px; font-size: 12px; font-weight: bold; color: #718096; text-align: right; margin-right: 8px; }
+        .progress-track { flex-grow: 1; background-color: #edf2f7; height: 8px; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+        
+        .content-text { white-space: pre-wrap; color: #4a5568; line-height: 1.5; }
+
+        /* 标签样式 (新功能) */
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; text-align: center; min-width: 60px; }
+        
+        /* 标签配色方案 */
+        .tag-green { background: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; } /* 量产 */
+        .tag-blue { background: #bee3f8; color: #2c5282; border: 1px solid #90cdf4; } /* 试产 */
+        .tag-cyan { background: #b2f5ea; color: #234e52; border: 1px solid #81e6d9; } /* 技改 */
+        .tag-purple { background: #e9d8fd; color: #553c9a; border: 1px solid #d6bcfa; } /* 调研/预研 */
+        .tag-gray { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; } /* 暂停/其他 */
+
+        /* 底部 Grid */
+        .grid-box { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .info-card { background: #f9fafb; border: 1px solid #edf2f7; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <div>
+            <h1>企划产品部门周报</h1>
+            <p style="margin:5px 0 0 0; color:#718096; font-size: 14px;">352科技环保有限公司 | 2026年第3周</p>
+        </div>
+        <div style="text-align: right; font-size: 13px; color: #718096;">
+            汇报日期：2026/01/23<br>
+            状态：<span style="color:#e53e3e; font-weight:bold;">● 存在异常项</span>
+        </div>
+    </div>
+
+    <div class="alert-box">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-content">
+            <h3>本周重点异常 / 风险汇总 (Risk Summary)</h3>
+            <ul class="alert-list">
+                <li><strong>Treeow-PC01 (T3 Pro)</strong>: 试产机顶部面板NG率100%、马达异音问题100%待优化。</li>
+                <li><strong>Treeow-PB21 (K3)</strong>: UV灯不良率偏高，评估整改需要重新Layout。</li>
+                <li><strong>Treeow-PB11 (T3)</strong>: 马达异音，初步确定电机驱动导致。</li>
+                <li><strong>352-PB16 (Q80)</strong>: PM2.5数据异常导致退货，负面评价集中在吸毛效果。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="section-title">🚀 开发阶段 (Development)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:10%">代号</th>
+                <th style="width:10%">型号</th>
+                <th style="width:6%">负责人</th>
+                <th style="width:10%; text-align:center;">阶段</th>
+                <th style="width:12%">进度</th>
+                <th style="width:30%">本周工作</th>
+                <th style="width:22%">下周计划 / 卡点</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+    <tr class="danger-row">
+        <td>Treeow-PC01</td>
+        <td style="font-weight:bold;">T3 Pro (T3)</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-blue">技改/试产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">80%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:80%; background-color:#319795;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、功能定义定稿，待软件修改到位<br>2、试产机顶部面板<span style="color:#c53030; font-weight:bold;">NG</span>率100%、马达因驱动因素，<span style="color:#c53030; font-weight:bold;">异音</span>问题100%待优化<br>3、第三方测试启动一部分，接下来的暂停<br>4、U形过滤器打样、UV灯适配U形方案进行中</td>
+        <td class="content-text">消毒机备案验证（已经在开始跑流程）</td>
+    </tr>
+    
+
+    <tr >
+        <td>Treeow-PC05</td>
+        <td style="font-weight:bold;">T2 Max</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-blue">试产完成</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">85%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:85%; background-color:#319795;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">T1试产已完成(1月9日上线)<br>1、过滤器持续优化，第二版样下周二可以确认数据<br>2、紫外灯灯光加金属罩——结构给方案</td>
+        <td class="content-text">确认滤网和UV灯</td>
+    </tr>
+    
+        </tbody>
+    </table>
+
+    <h2 class="section-title">🔭 预研阶段 (Research)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:10%">代号</th>
+                <th style="width:10%">型号</th>
+                <th style="width:6%">负责人</th>
+                <th style="width:10%; text-align:center;">阶段</th>
+                <th style="width:12%">进度</th>
+                <th style="width:30%">本周工作</th>
+                <th>下周计划</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+    <tr >
+        <td>352-PB15</td>
+        <td style="font-weight:bold;">Z150</td>
+        <td style="text-align:center;">张旭东</td>
+        <td style="text-align:center;"><span class="tag tag-purple">调研</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">调研</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr >
+        <td>352-PB09</td>
+        <td style="font-weight:bold;">Z70全效</td>
+        <td style="text-align:center;">张旭东</td>
+        <td style="text-align:center;"><span class="tag tag-purple">调研</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、外观目前已经敲定，PRD文档基本完成<br>2、下周立项，成本评估当中<br>3、过滤器结构已经敲定<br>4、UI操作逻辑及动画需求整理当中</td>
+        <td class="content-text">1、追踪跟进立项后成本<br>2、整机结构跟踪<br>3、UI及软件需求评估</td>
+    </tr>
+    
+
+    <tr class="danger-row">
+        <td>352-</td>
+        <td style="font-weight:bold;">Z91</td>
+        <td style="text-align:center;">张旭东</td>
+        <td style="text-align:center;"><span class="tag tag-purple">调研/摸底</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、新材料MOF应用阶段沟通<br>2、Z系列负面统计初步完成：传感器不准、滤芯发酸等<br>3、UV灯技改</td>
+        <td class="content-text">1、MOFs进度推进<br>2、负面评价拆分结论<br>3、滤网结构区分<br>4、噪音下CADR数据整理</td>
+    </tr>
+    
+
+    <tr >
+        <td>Treeow-PC04</td>
+        <td style="font-weight:bold;">二手烟</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-purple">预研</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">需求已经输出</td>
+        <td class="content-text">暂时无进展，研发会同步，下周进行详细沟通</td>
+    </tr>
+    
+
+    <tr >
+        <td>Treeow-PB17</td>
+        <td style="font-weight:bold;">宠物款</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-purple">预研</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、PCADR1000确认，抢舒乐氏C02<br>2、可视化功能需求</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr class="danger-row">
+        <td>Treeow-PB25</td>
+        <td style="font-weight:bold;">K1</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-gray">暂停</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">0%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:0%; background-color:#cbd5e0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text"><span style="color:#c53030; font-weight:bold;">暂停</span></td>
+        <td class="content-text">继续核对成本，下周输出</td>
+    </tr>
+    
+
+    <tr >
+        <td>Treeow-PB23</td>
+        <td style="font-weight:bold;">K4</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-purple">预研</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">20%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:20%; background-color:#a0aec0;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、尺寸加大到340mm，本周末到样品后测试确认<br>2、上市节奏与研发达成一致</td>
+        <td class="content-text"></td>
+    </tr>
+    
+        </tbody>
+    </table>
+
+    <h2 class="section-title">🏭 在产 & 技改 (Production)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:10%">代号</th>
+                <th style="width:10%">型号</th>
+                <th style="width:6%">负责人</th>
+                <th style="width:10%; text-align:center;">阶段</th>
+                <th style="width:12%">进度</th>
+                <th style="width:30%">本周工作 / 异常</th>
+                <th>下周计划</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+    <tr >
+        <td>Treeow-PB22</td>
+        <td style="font-weight:bold;">K2</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-green">量产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">100%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:100%; background-color:#38a169;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">正常</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr class="danger-row">
+        <td>Treeow-PB21</td>
+        <td style="font-weight:bold;">K3</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-green">量产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">100%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:100%; background-color:#38a169;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">UV灯<span style="color:#c53030; font-weight:bold;">不良</span>率偏高，评估整改需要重新layout</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr >
+        <td>Treeow-PB19</td>
+        <td style="font-weight:bold;">T2 Pro</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-green">量产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">100%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:100%; background-color:#38a169;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">正常</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr class="danger-row">
+        <td>Treeow-PB11</td>
+        <td style="font-weight:bold;">T3</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-green">量产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">100%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:100%; background-color:#38a169;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">马达<span style="color:#c53030; font-weight:bold;">异音</span>，初步确定电机驱动导致，下周整改到位</td>
+        <td class="content-text"></td>
+    </tr>
+    
+
+    <tr class="danger-row">
+        <td>352-PB16</td>
+        <td style="font-weight:bold;">Q80</td>
+        <td style="text-align:center;">张旭东</td>
+        <td style="text-align:center;"><span class="tag tag-green">量产</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">100%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:100%; background-color:#38a169;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">1、销量：165台，<span style="color:#c53030; font-weight:bold;">退货</span>10台（PM2.5<span style="color:#c53030; font-weight:bold;">异常</span>/无理由）。<br>2、垫子方案优化<br>3、详情页翻新<br>4、配件包材调整<br>5、IDEA奖视频素材已提供</td>
+        <td class="content-text">1、详细话术跟售后沟通<br>2、过滤器盒子敲定</td>
+    </tr>
+    
+
+    <tr >
+        <td>352-新风机</td>
+        <td style="font-weight:bold;">G45</td>
+        <td style="text-align:center;">刘康</td>
+        <td style="text-align:center;"><span class="tag tag-cyan">技改</span></td>
+        <td>
+    <div class="progress-wrapper">
+        <div class="progress-text">90%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:90%; background-color:#319795;"></div></div>
+    </div>
+    </td>
+        <td class="content-text">正常开产</td>
+        <td class="content-text"></td>
+    </tr>
+    
+        </tbody>
+    </table>
+
+    <div class="grid-box">
+        <div class="info-card">
+            <h3 style="margin-top:0; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">🎓 管培生工作 (Interns)</h3>
+            <ul style="font-size:13px; padding-left:20px; color:#4a5568;">
+                <li><strong style="color:var(--primary-color)">汪佳佩：</strong>完善竞品表格，购买对比静电棉，搜集垫子链接。</li>
+                <li style="margin-top:8px;"><strong style="color:var(--primary-color)">高妍：</strong>
+                    <br>• 口罩项目：线上线下用研，协助Luca翻译。
+                    <br>• 空净：Z90 & Z120 差评分析（结合Gemini）。
+                </li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3 style="margin-top:0; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">📌 其他事项 (Others)</h3>
+            <p style="font-size:13px; color:#4a5568;">
+                <strong>APP兼容蒙古地区：</strong><br>
+                1. 可正常接收验证码<br>
+                2. 暂时无蒙古语界面
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
